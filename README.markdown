@@ -1,7 +1,7 @@
 Net::Stitcho
 ============
 
-A Stitcho notification system client
+A [Stitcho notification system](http://www.stitcho.com/web/ "Stitcho.com - Desktop Notifications for Your Website") client
 
 
 Requirements
