@@ -7,7 +7,7 @@ use Carp::Clan;
 
 our $VERSION = '0.01';
 
-__PACKAGE__->mk_ro_accessors(qw( key id api_end_point ));
+__PACKAGE__->mk_ro_accessors(qw( key id ));
 
 
 #######
