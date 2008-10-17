@@ -36,6 +36,23 @@ sub send_uri {
   return qq{http://api.stitcho.com/api/partner/send?$call&s=$sig};
 }
 
+sub send {
+  my $self = shift;
+  
+  my $uri = $self->send_uri(@_);
+  
+  eval { require LWP::UserAgent };
+  croak('FATAL: LWP::UserAgent is required to use the send() method')
+    if $@;
+  
+  my $ua = LWP::UserAgent->new;
+  my $res = $ua->get($uri);
+
+  my $code = $res->code;
+  return undef if $code == 200;
+  return $code;
+}
+
 
 
 #######
@@ -92,6 +109,12 @@ Version 0.01
       url     => 'http://stitcho.com/', # Jump to this URL on click
       icon    => 1,                     # ID of the icon to use
     });
+    
+    my $error = $api->send({
+      # same arguments as send_uri()
+      # this version uses LWP::UserAgent to actually call the API
+    });
+
 
 
 =head1 DESCRITION
@@ -106,9 +129,9 @@ You can use this module in two ways:
 
 =over 4
 
-=item to generate the proper URIs to use with the API;
+=item * to generate the proper URIs to use with the API;
 
-=item to call the API;
+=item * to call the API;
 
 =back
 
@@ -137,6 +160,7 @@ Partner ID provided by Stitcho.com.
 Secret signing key provided by Stitcho.com.
 
 =back
+
 
 Returns a API object.
 
@@ -175,6 +199,51 @@ Numeric ID of the icon to use.
 
 Returns the complete URI to use to call the Send API. Use your prefered
 HTTP client to do the actual call.
+
+
+
+=head2 send
+
+Sends a notification to a user.
+
+Accepts the same parameters as the send_uri() method.
+
+After creating a proper URL, uses LWP::UserAgent to call the API.
+
+If successful, returns no error (undef).
+
+If not, returns the HTTP code of the operation. As of October 2008, the
+documented HTTP codes are:
+
+
+=over 4
+
+
+=item 202
+
+The call was formatted correctly, but the user was not connected, so the 
+notiﬁcation was not sent.
+
+
+=item 400
+
+The request was incorrectly formatted.
+
+If you get this error code, report it as a bug to the author of this module.
+
+
+=item 401
+
+The signature was invalid. Check the id and key parameters to your
+call to new().
+
+
+=item 500
+
+An unanticipated error occurred, and the problem most likely lies 
+with Stitcho, not your software. Retry in a minute or so.
+
+=back
 
 
 
