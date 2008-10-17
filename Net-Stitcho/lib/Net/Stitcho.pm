@@ -74,9 +74,6 @@ sub _req_params {
   return @r;
 }
 
-sub _uri_escape {
-  
-}
 
 42; # End of Net::Stitcho
 
