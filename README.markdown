@@ -8,8 +8,8 @@ Requirements
 ============
 
  * Perl;
- * A Stitcho partner API key.
- * LWP::UA if you use the network methods.
+ * A Stitcho partner ID and Signing key.
+ * LWP::UserAgent if you want to use the network methods.
 
 
 Author
