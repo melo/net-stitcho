@@ -16,7 +16,10 @@ no_index:
     - inc
     - t
 requires:
+  Carp::Clan: 0
   Class::Accessor::Fast: 0
+  Digest::MD5: 0
+  URI::Escape: 0
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/melo/net-stitcho
