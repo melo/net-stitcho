@@ -4,10 +4,38 @@ use warnings;
 use strict;
 use base qw( Class::Accessor::Fast );
 use Carp::Clan;
+use URI::Escape qw( uri_escape_utf8 );
+use Digest::MD5 qw( md5_hex );
 
 our $VERSION = '0.01';
 
 __PACKAGE__->mk_ro_accessors(qw( key id ));
+
+sub send_uri {
+  my ($self, $args) = @_;
+  
+  # Parse arguments
+  my ($email, $title, $mesg, $url)
+      = _req_params($args, qw( email title message url ));
+  my $icon = $args->{icon};
+  
+  # Construct list of parameters to sign
+  my @params;
+  push @params, 'p='.$self->id;
+  push @params, 'i='.$icon if defined $icon;
+  push @params, 'md5=',md5_hex($email);
+  push @params, 't=',uri_escape_utf8($title);
+  push @params, 'm=',uri_escape_utf8($mesg);
+  push @params, 'u=',uri_escape_utf8($url);
+  my $call = join('&', @params);
+  
+  # sign the call
+  my $sig = md5_hex($call.$self->key);
+  
+  # construct the final URL
+  return qq{http://api.stitcho.com/api/partner/send?$call&s=$sig};
+}
+
 
 
 #######
@@ -29,6 +57,9 @@ sub _req_params {
   return @r;
 }
 
+sub _uri_escape {
+  
+}
 
 42; # End of Net::Stitcho
 
@@ -94,6 +125,7 @@ this module.
 
 Creates a new API object. Accepts a hashref of parameters. Valid keys are:
 
+
 =over 4
 
 =item id
@@ -107,6 +139,42 @@ Secret signing key provided by Stitcho.com.
 =back
 
 Returns a API object.
+
+
+
+=head2 send_uri
+
+Constructs the URI to use to send a notification to a user.
+
+Accepts a hashref of parameters. Valid keys are:
+
+
+=over 4
+
+=item email
+
+Email address of recipient.
+
+=item title
+
+Title of the notification.
+
+=item message
+
+Message text.
+
+=item url
+
+If the message is clicked, the users browser will open with this URL.
+
+=item icon (optional)
+
+Numeric ID of the icon to use.
+
+=back
+
+Returns the complete URI to use to call the Send API. Use your prefered
+HTTP client to do the actual call.
 
 
 
