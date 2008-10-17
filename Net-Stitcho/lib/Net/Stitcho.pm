@@ -3,10 +3,31 @@ package Net::Stitcho;
 use warnings;
 use strict;
 use base qw( Class::Accessor::Fast );
+use Carp::Clan;
 
 our $VERSION = '0.01';
 
 __PACKAGE__->mk_ro_accessors(qw( key id api_end_point ));
+
+
+#######
+# Utils
+
+sub _req_params {
+  my $args = shift;
+  croak('FATAL: hashref is required as first argument, ')
+    unless ref($args) eq 'HASH';
+  
+  my @r;
+  foreach my $k (@_) {
+    croak("FATAL: required parameter '$k' is missing, ")
+      unless exists $args->{$k};
+    
+    push @r, $args->{$k};
+  }
+  
+  return @r;
+}
 
 
 42; # End of Net::Stitcho
