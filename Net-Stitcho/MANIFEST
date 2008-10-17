@@ -6,3 +6,16 @@ lib/Net/Stitcho.pm
 t/00-load.t
 t/pod-coverage.t
 t/pod.t
+.gitignore
+inc/Module/Install.pm
+inc/Module/Install/Base.pm
+inc/Module/Install/Can.pm
+inc/Module/Install/Fetch.pm
+inc/Module/Install/Makefile.pm
+inc/Module/Install/Metadata.pm
+inc/Module/Install/Win32.pm
+inc/Module/Install/WriteAll.pm
+META.yml
+t/01-api.t
+t/02-util.t
+t/03-live.t
