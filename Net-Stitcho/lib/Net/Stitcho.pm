@@ -2,9 +2,11 @@ package Net::Stitcho;
 
 use warnings;
 use strict;
+use base qw( Class::Accessor::Fast );
 
 our $VERSION = '0.01';
 
+__PACKAGE__->mk_ro_accessors(qw( key id api_end_point ));
 
 
 42; # End of Net::Stitcho

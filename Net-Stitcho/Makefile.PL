@@ -5,6 +5,8 @@ name     'Net-Stitcho';
 all_from 'lib/Net/Stitcho.pm';
 repository 'http://github.com/melo/net-stitcho';
 
+# Dependencies
+requires 'Class::Accessor::Fast' => 0;
 
 build_requires 'Test::More';
 
