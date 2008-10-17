@@ -1,12 +1,14 @@
 use inc::Module::Install;
 
+# Basic MetaData
 name     'Net-Stitcho';
 all_from 'lib/Net/Stitcho.pm';
-author   'Pedro Melo <melo@cpan.org>';
+repository 'http://github.com/melo/net-stitcho';
+
 
 build_requires 'Test::More';
 
-auto_install;
-
 WriteAll;
+
+
 
