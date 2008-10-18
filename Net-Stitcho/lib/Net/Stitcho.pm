@@ -23,10 +23,10 @@ sub send_uri {
   my @params;
   push @params, 'p='.$self->id;
   push @params, 'i='.$icon if defined $icon;
-  push @params, 'md5=',md5_hex($email);
-  push @params, 't=',uri_escape_utf8($title);
-  push @params, 'm=',uri_escape_utf8($mesg);
-  push @params, 'u=',uri_escape_utf8($url);
+  push @params, 'md5='.md5_hex($email);
+  push @params, 't='.uri_escape_utf8($title);
+  push @params, 'm='.uri_escape_utf8($mesg);
+  push @params, 'u='.uri_escape_utf8($url);
   my $call = join('&', @params);
   
   # sign the call

@@ -27,7 +27,7 @@ lives_ok sub {
     url     => 'http://www.stitcho.com/',
   });
 };
-is($uri, 'http://api.stitcho.com/api/partner/send?p=1&md5=&4809188f41ad2613f4c240b72d97604c&t=&Hello!&m=&Have%20a%20nice%20day%20%26%20all!&u=&http%3A%2F%2Fwww.stitcho.com%2F&s=838b98ea122a5055e418128813d8b91e');
+is($uri, 'http://api.stitcho.com/api/partner/send?p=1&md5=4809188f41ad2613f4c240b72d97604c&t=Hello!&m=Have%20a%20nice%20day%20%26%20all!&u=http%3A%2F%2Fwww.stitcho.com%2F&s=ba4fad43b1dbfec0c60f53c2a6b5186a');
 
 lives_ok sub {
   $uri = $api->send_uri({
@@ -38,7 +38,7 @@ lives_ok sub {
     icon    => 53,
   });
 };
-is($uri, 'http://api.stitcho.com/api/partner/send?p=1&i=53&md5=&4809188f41ad2613f4c240b72d97604c&t=&Hello!&m=&Have%20a%20nice%20day%20%26%20all!&u=&http%3A%2F%2Fwww.stitcho.com%2F&s=5e7253b128b86b72d7770309a609ecc9');
+is($uri, 'http://api.stitcho.com/api/partner/send?p=1&i=53&md5=4809188f41ad2613f4c240b72d97604c&t=Hello!&m=Have%20a%20nice%20day%20%26%20all!&u=http%3A%2F%2Fwww.stitcho.com%2F&s=0170469cbcd47e5e32b0676f732d7fc1');
 
 
 # Test bad API usage
