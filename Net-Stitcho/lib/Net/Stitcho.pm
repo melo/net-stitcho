@@ -7,7 +7,7 @@ use Carp::Clan;
 use URI::Escape qw( uri_escape_utf8 );
 use Digest::MD5 qw( md5_hex );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 __PACKAGE__->mk_ro_accessors(qw( key id ));
 

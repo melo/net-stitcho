@@ -1,5 +1,11 @@
 Revision history for Net-Stitcho
 
+0.02    2008/10/18
+			   - Bugfix: the code was generating bad URLs with extra & (Pedro Melo)
+         - Added UTF8 message tests (Pedro Melo)
+			   - Add test plan and comments to the live tests (Pedro Melo)
+			   - Remove unused uri_escape() function (Pedro Melo)
+			 
 0.01    2008/10/17
-        First release with basic send capabilities
+         - First release with basic send capabilities (Pedro Melo)
 
