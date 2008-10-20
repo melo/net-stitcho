@@ -49,6 +49,22 @@ sub send {
 }
 
 
+sub signup_uri {
+  my ($self, $args) = @_;
+  
+  # Parse arguments
+  my ($email, $mesg)
+      = _req_params($args, qw( email message ));
+  
+  # Construct list of parameters to sign
+  my @params;
+  push @params, 'p='.$self->id;
+  push @params, 'e='.uri_escape_utf8($email);
+  push @params, 'm='.uri_escape_utf8($mesg);
+  
+  return $self->_signed_api_call('signup', @params);
+}
+
 
 #######
 # Utils
@@ -248,6 +264,32 @@ An unanticipated error occurred, and the problem most likely lies
 with Stitcho, not your software. Retry in a minute or so.
 
 =back
+
+
+
+=head2 signup_uri
+
+Constructs the URI to use to send the signup email message
+to a email address.
+
+Accepts a hashref of parameters. Valid keys are:
+
+
+=over 4
+
+=item email
+
+Email address of recipient.
+
+=item message
+
+Email message text.
+
+=back
+
+Returns the complete URI to use to call the Signup API. Use your prefered
+HTTP client to do the actual call.
+
 
 
 
