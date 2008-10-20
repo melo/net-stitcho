@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 use Test::Exception;
-use encoding 'utf8';
+use Encode qw( decode );
 
 my ($id, $key, $rcpt) = @ENV{qw( STITCHO_PARTNER STITCHO_KEY STITCHO_RCPT)};
 
@@ -33,7 +33,7 @@ ok(!defined($error), "API returned ".($error || 200));
 
 
 $args->{title} = 'Friendly advice';
-$args->{message} = 'A  a day keeps the borg away!';
+$args->{message} = decode('utf8', 'A  a day keeps the borg away!');
 
 lives_ok sub { $error = $api->send($args) }, "send() utf8 lived";
 ok(!defined($error), 'API returned '.($error || 200). ' for utf8 content');
