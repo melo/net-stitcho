@@ -27,13 +27,8 @@ sub send_uri {
   push @params, 't='.uri_escape_utf8($title);
   push @params, 'm='.uri_escape_utf8($mesg);
   push @params, 'u='.uri_escape_utf8($url);
-  my $call = join('&', @params);
   
-  # sign the call
-  my $sig = md5_hex($call.$self->key);
-  
-  # construct the final URL
-  return qq{http://api.stitcho.com/api/partner/send?$call&s=$sig};
+  return $self->_signed_api_call('send', @params);
 }
 
 sub send {
@@ -57,6 +52,18 @@ sub send {
 
 #######
 # Utils
+
+sub _signed_api_call {
+  my ($self, $api, @params) = @_;
+  
+  my $call = join('&', @params);
+  
+  # sign the call
+  my $sig = md5_hex($call.$self->key);
+  
+  # construct the final URL
+  return qq{http://api.stitcho.com/api/partner/$api?$call&s=$sig};
+}
 
 sub _req_params {
   my $args = shift;
