@@ -34,18 +34,7 @@ sub send_uri {
 sub send {
   my $self = shift;
   
-  my $uri = $self->send_uri(@_);
-  
-  eval { require LWP::UserAgent };
-  croak('FATAL: LWP::UserAgent is required to use the send() method')
-    if $@;
-  
-  my $ua = LWP::UserAgent->new;
-  my $res = $ua->get($uri);
-
-  my $code = $res->code;
-  return undef if $code == 200;
-  return $code;
+  return $self->_call_api($self->send_uri(@_));
 }
 
 
@@ -68,6 +57,21 @@ sub signup_uri {
 
 #######
 # Utils
+
+sub _call_api {
+  my ($self, $uri) = @_;
+
+  eval { require LWP::UserAgent };
+  croak('FATAL: LWP::UserAgent is required to use the send() method')
+    if $@;
+
+  my $ua = LWP::UserAgent->new;
+  my $res = $ua->get($uri);
+
+  my $code = $res->code;
+  return undef if $code == 200;
+  return $code;
+}
 
 sub _signed_api_call {
   my ($self, $api, @params) = @_;
