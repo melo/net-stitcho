@@ -54,6 +54,12 @@ sub signup_uri {
   return $self->_signed_api_call('signup', @params);
 }
 
+sub signup {
+  my $self = shift;
+  
+  return $self->_call_api($self->signup_uri(@_));
+}
+
 
 #######
 # Utils
@@ -294,6 +300,16 @@ Email message text.
 Returns the complete URI to use to call the Signup API. Use your prefered
 HTTP client to do the actual call.
 
+
+=head2 signup
+
+Sends a signup email to a email address.
+
+Accepts the same parameters as the C<signup_uri()> method.
+
+After creating a proper URL, uses L<LWP::UserAgent> to call the API.
+
+See the C<send()> method for possible return codes.
 
 
 
