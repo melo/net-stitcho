@@ -166,7 +166,7 @@ You can use this module in two ways:
 =back
 
 The first option is best if you have a way to do the HTTP GET request
-yourself. For example, if you are using AnyEvent or POE, you can use
+yourself. For example, if you are using L<AnyEvent> or L<POE>, you can use
 their Async HTTP client to call the API using the URI calculated by
 this module.
 
@@ -236,9 +236,9 @@ HTTP client to do the actual call.
 
 Sends a notification to a user.
 
-Accepts the same parameters as the send_uri() method.
+Accepts the same parameters as the C<send_uri()> method.
 
-After creating a proper URL, uses LWP::UserAgent to call the API.
+After creating a proper URL, uses L<LWP::UserAgent> to call the API.
 
 If successful, returns no error (undef).
 
@@ -264,8 +264,8 @@ If you get this error code, report it as a bug to the author of this module.
 
 =item 401
 
-The signature was invalid. Check the id and key parameters to your
-call to new().
+The signature was invalid. Check the C<id> and C<key> parameters to your
+call to C<new()>.
 
 
 =item 500
