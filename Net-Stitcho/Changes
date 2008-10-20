@@ -1,5 +1,14 @@
 Revision history for Net-Stitcho
 
+0.03    2008/10/20
+         - POD Tweaks (Pedro Melo)
+				 - Added signup() API (Pedro Melo)
+				 - Move HTTP GET code to a _call_api() util method (Pedro Melo)
+				 - Added signup_uri() method (Pedro Melo)
+				 - Moved signed API Call to a utility method (Pedro Melo)
+				 - Stop using the encoding module in the tests (Pedro Melo)
+	 			 - Added missing build_requires option for Test::Exception (Pedro Melo)
+        
 0.02    2008/10/18
 			   - Bugfix: the code was generating bad URLs with extra & (Pedro Melo)
          - Added UTF8 message tests (Pedro Melo)

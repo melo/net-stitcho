@@ -3,9 +3,11 @@ abstract: 'Client module for the Stitcho.com API'
 author:
   - 'Pedro Melo, C<< <melo at cpan.org> >>'
 build_requires:
+  Encode: 0
+  Test::Exception: 0
   Test::More: 0
 distribution_type: module
-generated_by: 'Module::Install version 0.76'
+generated_by: 'Module::Install version 0.760'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -23,4 +25,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/melo/net-stitcho
-version: 0.02
+version: 0.03
